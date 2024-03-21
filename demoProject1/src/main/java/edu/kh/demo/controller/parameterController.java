@@ -38,7 +38,7 @@ public class parameterController {
 	 * 존재하는 객체를 바인딩 또는 없으면 생성해서 바인딩
 	 * 
 	 * --> ArgumentResolver (전달 인자 해결사)
-	 * 
+	 *  https://docs.spring.io/spring-framework/reference/web/webflux/controller/ann-methods/arguments.html
 	 */
 	@PostMapping("test1")   ///parma/test1 POST방식 요청 매핑
 	public String paramTest1( HttpServletRequest req) {
@@ -63,8 +63,33 @@ public class parameterController {
 		return "redirect:/param/main";
 	}
 	
-	//400 Bad Request
-	//-파라미터 불충분
+	/* 2. @RequestParam 어노테이션 - 낱개(한 개, 단 수)개 파라미터 얻어오기
+	 * 
+	 * - request객체를 이용한 파라미터 전달 어노테이션 
+	 * - 매개 변수 앞에 해당 어노테이션을 작성하면, 매개변수에 값이 주입됨.
+	 * - 주입되는 데이터는 매개 변수의 타입이 맞게 형변환/파싱이 자동으로 수행됨!
+	 * 
+	 * [기본 작성법]
+	 * @RequestParam("key") 자료형 매개변수명
+	 * 
+	 * 
+	 * [속성 추가 작성법]
+	 * @RequestParam(value="name", required="fasle", defaultValue="1") 
+	 * 
+	 * value : 전달 받은 input 태그의 name 속성값
+	 * 
+	 * required : 입력된 name 속성값 파라미터 필수 여부 지정(기본값 true) 
+	 * 	-> required = true인 파라미터가 존재하지 않는다면 400 Bad Request 에러 발생 
+	 * 	-> required = true인 파라미터가 null인 경우에도 400 Bad Request
+	 * 
+	 * defaultValue : 파라미터 중 일치하는 name 속성 값이 없을 경우에 대입할 값 지정. 
+	 * 	-> required = false인 경우 사용
+	 */
+	
+	
+	// 400 Bad Request(잘못된 요청)
+	// - 파라미터 불충분
+
 	@PostMapping("test2")
 	public String paramTest2(
 			@RequestParam("title") String title,
@@ -107,6 +132,29 @@ public class parameterController {
 		log.debug("paramMap:"+paramMap);
 		return "redirect:/param/main";
 	}
+	
+	
+	
+	
+	/* 4. @ModelAttribute를 이용한 파라미터 얻어오기 */
+	
+	
+	// @ModelAttribute
+	
+	// - DTO(또는 VO)와 같이 사용하는 어노테이션
+	
+	// - 전달 받은 파라미터의 name 속성 값이
+	//   같이 사용되는 DTO의 필드명과 같다면
+	//   자동으로 setter를 호출해서 필드에 값을 세팅
+	
+	// *** @ModelAttribute 사용 시 주의사항 ***
+	// - DTO에 기본 생성자가 필수로 존재해야 한다!
+	// - DTO에 setter가 필수로 존재해야 한다!
+	
+	// *** @ModelAttribute 어노테이션은 생략이 가능하다! ***
+	
+	// *** @ModelAttribute를 이용해 값이 필드에 세팅된 객체를
+	//		"커맨드 객체" 라고 한다 ***
 	
 	
 	@PostMapping("test4")

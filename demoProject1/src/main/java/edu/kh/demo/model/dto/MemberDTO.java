@@ -19,8 +19,5 @@ public class MemberDTO {
 	private String memberPw;
 	private String memberName;
 	private int  memberAge;
-	
-
-	
 
 }

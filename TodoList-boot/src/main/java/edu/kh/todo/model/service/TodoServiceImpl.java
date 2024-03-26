@@ -101,4 +101,14 @@ public int getTotalCount() {
 public int getCompleteCount() {
 	return mapper.getCompleteCount();
 }
+
+@Override
+public List<Todo> selectList() {
+	return mapper.selectAll();
+}
+
+
+
+
+
 }

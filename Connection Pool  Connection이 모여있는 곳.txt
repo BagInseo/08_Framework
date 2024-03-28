@@ -7,3 +7,15 @@
  * 생성/소멸(반환) 걸리는 시간이 현격히 감소
  
  * 대기열 + DB 연결 과부하 예방
+
+서버 start
+->각종 설정 읽음
+ (서버 기본 설정 , 자동 설정, 사용자 설정(DBCP) )
+ +(Component (Bean등록 구문))
+	(@Component , @Controller @ Servivce @Mapper)
+
+-> 클라이언트 요청 대기 상태
+
+-> 클라이언트 요청 ->DispatcherServlet
+->Controller -> Service -> DAO/Mapper -> DB
+-> DAO/Mapper -> service -> Controller

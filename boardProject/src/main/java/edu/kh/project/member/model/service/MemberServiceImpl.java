@@ -1,5 +1,7 @@
 package edu.kh.project.member.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -110,7 +112,30 @@ public int checkNickname(String memberNickname) {
 	return mapper.checkNickname(memberNickname);
 }
 
+
+
+@Override
+public Member quickLogin(String memberEmail) {
+	
+	Member loginMember = mapper.login(memberEmail);
+	
+
+	if(loginMember == null) return null;
+	
+	loginMember.setMemberPw(null);
+	return loginMember;
 }
+
+
+@Override
+public List<Member> selectMemberList() {
+	return mapper.selectMemberList();
+}
+
+}
+
+
+
 
 
 /* BCrypt 암호화 (Spring Security 제공)

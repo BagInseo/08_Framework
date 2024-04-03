@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <!-- templates/common/common.html 조각 추가 -->
     <th:block th:replace="~{common/common}"></th:block>
 </head>
+
 <body>
 
     <main>
@@ -22,12 +24,19 @@
                 <!-- session에 loginMember 있으면 출력 -->
                 <th:block th:text="${session.loginMember}"></th:block>
                 <!--확인, 보충 등등 그때 그때 사용-->
+
+                <h3>빠른 로그인</h3>
+                <button class="quick-login">baginseo400@gmail.com</button>
+                <button class="quick-login">member01@kh.or.kr</button>
+                <!-- <button class="quick-login">knbdh9782@naver.com</button> -->
+
+                <hr>
             </section>
 
             <section class="content-2">
                 <!--로그인, 회원가입-->
-                
-                
+
+
 
                 <!-- 로그인이 되어있지 않은 경우 -->
                 <th:block th:if="${session.loginMember == null}">
@@ -35,29 +44,26 @@
                     <!--로그인 박스-->
                     <form action="/member/login" method="POST" id="loginForm">
                         <fieldset class="id-pw-area">
-    
+
                             <!--아이디, 비밀번호 입력-->
                             <section>
-                                <input type="text" name="memberEmail"
-                                        placeholder="이메일"
-                                        autocomplete="off">
-                                
-                                <input type="password" name="memberPw"
-                                        placeholder="비밀번호">
+                                <input type="text" name="memberEmail" placeholder="이메일" autocomplete="off">
+
+                                <input type="password" name="memberPw" placeholder="비밀번호">
                             </section>
-    
+
                             <!--로그인 버튼-->
                             <section>
                                 <button>로그인</button>
                             </section>
-    
+
                         </fieldset>
                         <label>
                             <!--label :  input태그의 제목을 나타내는 태그-->
                             <input type="checkbox" name="saveId">
                             아이디 저장
                         </label>
-    
+
                         <article class="signup-find-area">
                             <a href="/member/signup">회원 가입</a>
                             <span> | </span>
@@ -72,22 +78,20 @@
                     <article class="login-area">
                         <a href="#">
                             <!-- 프로필 이미지 -->
-                            <img th:src="#{user.default.image}" 
-                                    id="memberProfile"
-                                    alt="프로필 이미지 없음" >
+                            <img th:src="#{user.default.image}" id="memberProfile" alt="프로필 이미지 없음">
                         </a>
 
                         <div class="my-info" th:object="${session.loginMember}">
 
                             <div>
-                                <a href="#" id="nickname" th:text="*{memberNickname}">닉네임</a>
+                                <a href="/myPage/info" id="nickname" th:text="*{memberNickname}">닉네임</a>
                                 <a href="/member/logout" id="logoutBtn">로그아웃</a>
                             </div>
 
                             <p th:text="*{memberEmail}">이메일</p>
                     </article>
                     <!-- 닉네임, 이메일,로그아웃 버튼 여억 -->
-                  
+
                     </div>
                 </th:block>
 
@@ -97,6 +101,7 @@
 
     </main>
     <th:block th:replace="~{common/footer}"></th:block>
-<script src="/js/main.js"></script>
+    <script src="/js/main.js"></script>
 </body>
+
 </html>

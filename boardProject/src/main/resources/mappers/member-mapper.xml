@@ -56,4 +56,10 @@
 	</select>
 
 
+ 	<select id="selectMemberList" resultType="Member">
+	 	SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_DEL_FL
+		FROM "MEMBER"
+		ORDER BY MEMBER_NO	
+ 	</select>
+
 </mapper>

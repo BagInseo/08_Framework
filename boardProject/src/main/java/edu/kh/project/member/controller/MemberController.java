@@ -1,5 +1,7 @@
 package edu.kh.project.member.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -219,6 +221,34 @@ public class MemberController {
 			@RequestParam("memberNickname") String memberNickname) {
 		
 		return service.checkNickname(memberNickname);
+	}
+	
+	
+	@GetMapping("quickLogin")
+	public String quickLogin(
+		@RequestParam("memberEmail") String memberEmail, 
+		Model model, 
+		RedirectAttributes ra) {
+		
+		Member loginMember = service.quickLogin(memberEmail);
+		
+		if( loginMember == null ) {
+			ra.addFlashAttribute("message", "�빐�떦 �씠硫붿씪 �쉶�썝�씠 議댁옱�븯吏� �븡�뒿�땲�떎");
+		}else {
+			model.addAttribute("loginMember", loginMember);
+		}
+		
+		return "redirect:/";
+	}
+	
+	@ResponseBody
+	@GetMapping("selectMemberList")
+	public List<Member> selectMemberList(){
+		
+		// (java)List 
+		// -> (Spring)HttpMessageConverter媛� JSON Array(臾몄옄�뿴)濡� 蹂�寃�
+		// -> (JS)response.json() -> [{}, {}, {}] JS 媛앹껜 諛곗뿴
+		return service.selectMemberList();
 	}
 	
 	

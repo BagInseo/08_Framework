@@ -408,3 +408,6 @@ display: none;
 
 .header-menu a:hover{color: white; background-color: var(--main-color);}
 
+.content-1 hr{
+    margin: 10px 0;
+}

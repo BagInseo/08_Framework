@@ -27,4 +27,18 @@ public interface MyPageMapper {
 	 */
 	String selectPw(int memberNo);
 
+
+
+	int countMember(String memberPw);
+
+
+
+	int changeSecession(int memberNo);
+
+
+
+
+
+
+
 }

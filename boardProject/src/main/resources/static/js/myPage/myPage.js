@@ -79,6 +79,98 @@ if(updateInfo != null){
 }
 
 
+//----------------------------------------------
+/* 비밀번호 수정 */
+const changePw=document.querySelector("#changePw") //비밀번호 변경 form태그
+
+if(changePw!=null){
+  //제툴 되었을 때
+  changePw.addEventListener("submit", e=>{
+    //-값을 모두 입력 했는가?
+
+    let str; // undefined
+
+    const currentPw = document.querySelector("#currentPw"); //현재 비번
+    const newPw = document.querySelector("#newPw"); //새 비번
+    const newPwConfirm = document.querySelector("#newPwConfirm"); //배 비번 확인
+
+    if(currentPw.value.trim()==0) str="현재 비밀번호를 입력해주세요";
+    else if(newPw.value.trim()==0) str="새 비밀번호를 입력해주세요";
+    else if(newPwConfirm.value.trim()==0) str="새 비밀번호 확인을 입력해주세요";
+
+    if(str != undefined){ //str에 값이 대입됨 == if 중 하나 실행됨
+      alert(str);
+      e.preventDefault();
+      return;
+    }
+
+
+    //-비밀번호 정규식 검사
+    const regExp = /^[a-zA-Z0-9!@#_-]{6,20}$/;
+
+    if(!regExp.test(newPw.value)){//새 비밀번호 정규식 통과x
+      alert("새 비밀번호가 유효하지 않습니다");
+      e.preventDefault();
+      return;
+    }
+
+
+    //새 비밀번호 == 새 비밀번호 확인
+    if(newPw.value!=newPwConfirm.value){
+      alert("새 비밀번호가 일치하지 않습니다.");
+      e.preventDefault();
+      return;
+    }
+
+  });
+};
+
+
+
+//--------------------------------------------------------------------
+/* 탈퇴 유효성 검사 */
+const secession = document.querySelector("#secession") // 탈퇴 form 태그
+
+
+if(secession!=null){
+  secession.addEventListener("submit",e=>{
+
+    const memberPw=document.querySelector("#memberPw");
+    const agree=document.querySelector("#agree");
+
+    //비밀번호 임력 디었는지 확인
+    if(memberPw.value.trim()==0){
+      alert("비밀번호를 입력해주세요");
+      e.preventDefault();
+      return;
+    }
+
+    //약관 동의 체크하였는지 
+    //checkbox 또는 radio에 .checked 속성
+    //- checked -> 체크시 true, 미체크시 false반환
+
+    //checked = true -> 체크하기
+    //checked = false -> 체크 해제 하기
+
+    if(!agree.checked){
+      alert("약관에 동의해주세요");
+      e.preventDefault();
+      return;
+    }
+
+
+
+    //정말 탈퇴? 물어보기
+    if(!confirm("정말 탈퇴 하시겠습니까")) { //취소 선택 시
+      alert("최소 되었습니다")
+    };
+
+  
+  });
+};
+
+
+
 
 
 

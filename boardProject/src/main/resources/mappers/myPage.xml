@@ -26,4 +26,10 @@
 		SET MEMBER_PW= #{memberPw}
 		WHERE MEMBER_NO =#{memberNo}
 	</update>
+	
+	<update id="changeSecession">
+		UPDATE "MEMBER"
+		SET MEMBER_DEL_FL='Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 </mapper>

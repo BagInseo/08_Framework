@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>책 관리 프로그램</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <h1>책 관리 프로그램</h1>
+
+
+    <a href="/book/addBook" id="addBook">책 등록</a>
+    <a href="/book/SearchUpdateDelete" id="SearchUpdateDelete">책 검색,수정,삭제</a>
+
+    <hr>
+
+    <div class="selectArea">
+        <h3>모든 책 조회</h3>
+        <button id="selectBtn">조회</button>
+    </div>
+
+
+    <table border="1" style="border-collapse: collapse;" class="bookTable">
+        <thead class="bookListTitle">
+            <th>책번호</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>가격</th>
+            <th>등록일</th>
+        </thead>
+
+        <tbody id="bookList">
+
+        </tbody>
+    </table>
+
+
+    <script th:inline="javascript">
+        const message =  /*[[${message}]]*/ "전달 받은 message";
+        // message가 없다면 null
+
+        if (message != null) alert(message);
+    </script>
+
+
+    <script src="/js/main.js"></script>
+
+</body>
+
+</html>

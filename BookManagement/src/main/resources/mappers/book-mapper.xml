@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pis.book.Book.model.mapper.BookMapper">
+
+
+<!-- 책 목록 조회하기 -->
+<select id="selectBookList">
+	SELECT * FROM "BOOK"
+</select>
+
+
+<!-- 책 등록하기 -->
+<insert id="addBook">
+	INSERT INTO "BOOK"
+	VALUES(SEQ_BOOK_NO.NEXTVAL,
+			#{bookTitle},
+			#{bookWriter},
+			#{bookPrice},
+			DEFAULT)
+</insert>
+
+<!-- 책 제목 검색하기 -->
+<select id="SearchUpdateDelete">
+	SELECT *
+	FROM "BOOK"
+	WHERE BOOK_TITLE LIKE'%${bookTitle}%'
+</select>
+
+
+<!-- 책 가격 수정하기 -->
+<update id="updatePrice">
+	UPDATE "BOOK"
+	SET BOOK_PRICE=#{bookPrice}
+	WHERE BOOK_NO=#{bookNo}
+</update>
+
+
+
+<delete id="deleteBook">
+	DELETE FROM "BOOK" 
+	WHERE BOOK_NO=#{bookNo}
+</delete>
+</mapper>

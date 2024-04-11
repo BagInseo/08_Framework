@@ -11,8 +11,7 @@
         <article class="search-area">
             <form action="#" method="GET">
                 <fieldset>
-                    <input type="search" id="query" name="query" 
-                           placeholder="검색어를 입력해주세요" autocomplete="off">
+                    <input type="search" id="query" name="query" placeholder="검색어를 입력해주세요" autocomplete="off">
 
                     <!-- 제목 검색 -->
                     <input type="hidden" name="key" value="t">
@@ -36,10 +35,10 @@
     <div class="header-top-menu">
         <!-- 로그인x -->
         <th:block th:if="${session.loginMember==null}">
-        <a href="/">메인 페이지</a>
-        <a href="/member/login">로그인</a>
+            <a href="/">메인 페이지</a>
+            <a href="/member/login">로그인</a>
         </th:block>
-    
+
         <!-- 로그인O -->
         <th:block th:unless="${session.loginMember==null}">
             <label for="headerMenuToggle">
@@ -62,14 +61,14 @@
 <!-- navigator -->
 <nav>
     <ul>
-        <li>
-            <a href="#">공지사항</a>
-        </li>
-        <li>
-            <a href="#">자유 게시판</a>
-        </li>
-        <li>
-            <a href="#">질문 게시판</a>
-        </li>
+
+        <th:block th:each="boardType : ${application.boardTypeList}">
+            <li>
+                <a th:href="@{/board/{boardCode}(boardCode=${boardType.boardCode})}"
+                    th:text="${boardType.boardName}">게시판
+                    이름</a>
+            </li>
+        </th:block>
+
     </ul>
 </nav>

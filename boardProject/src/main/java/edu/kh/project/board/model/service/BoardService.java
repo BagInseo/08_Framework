@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.kh.project.board.model.dto.Board;
+
 
 public interface BoardService {
 	
@@ -19,6 +21,12 @@ public interface BoardService {
 	 * @return map
 	 */
 	Map<String, Object> selectBoardList(int boardCode, int cp);
+
+	/** 게시글 상세 조회
+	 * @param map
+	 * @return
+	 */
+	Board selectOne(Map<String, Integer> map);
 	
 	
 

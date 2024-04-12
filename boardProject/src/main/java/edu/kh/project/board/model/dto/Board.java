@@ -1,5 +1,7 @@
 package edu.kh.project.board.model.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +22,7 @@ public class Board {
 	private String boardTitle;
 	private String boardContent;
 	private String boardWriteDate;
-	private String boardUPdateDate;
+	private String boardUpdateDate;
 	private int readCount;
 	private String boardDelFl;
 	private int memberNo;
@@ -38,11 +40,16 @@ public class Board {
 	// 게시글 작성자 프로피 ㅇ이미지
 	private String profileImg;
 	
+
+	
+
+	
 	//게시물 String thumbnail;
 	
 	//--추가 예정--
 	//특정 게시글 이미지 목록
+	private List<BoardImg> imageList;
 	
-	
-	//츠겆ㅇ 게시글에 작성된 댓글 목록
+	//특정 게시글에 작성된 댓글 목록
+	private List<Comment> commentList;
 }

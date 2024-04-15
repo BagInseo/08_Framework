@@ -8,17 +8,53 @@ import org.apache.ibatis.session.RowBounds;
 
 import edu.kh.project.board.model.dto.Board;
 
+/**
+ * 
+ */
 @Mapper
 public interface BoardMapper {
 
+	/** 게시판 종류 조회
+	 * @return
+	 */
 	List<Map<String, Object>> selectBoardTypeList();
 
-	Map<String, Object> selectBoardList();
-
+	/** 게시글 수 조회
+	 * @param boardCode
+	 * @return listCount
+	 */
 	int getListCount(int boardCode);
 
+	/** 특정 게시판의 지정된 페이지 목록 조회
+	 * @param boardCode
+	 * @param rowBounds
+	 * @return boardList
+	 */
 	List<Board> selectBoardList(int boardCode, RowBounds rowBounds);
+
 
 	Board selectOne(Map<String, Integer> map);
 
+	/** 좋아요 해제(DELETe)
+	 * @param map
+	 * @return result
+	 */
+	int deleteBoardLike(Map<String, Integer> map);
+	
+
+	/**좋아요 체크
+	 * @param map
+	 * @return
+	 */
+	int insertBoardLike(Map<String, Integer> map);
+
+	/** 게시글 좋아요 게시글 조회
+	 * @param temp
+	 * @return
+	 */
+	int selectLikeCount(int temp);
+
+	int updateReadCount(int boardNo);
+
+	int selectReadCount(int boardNo);
 }

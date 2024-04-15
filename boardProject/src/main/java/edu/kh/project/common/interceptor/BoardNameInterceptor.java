@@ -15,45 +15,58 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardNameInterceptor implements HandlerInterceptor{
 
 	
-	// 후처리() Controller ->Dispatcher ;
-
+	// 후처리 (Controller -> Dispatcher Servlet 사이) 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		//application socpe에 board TyoeList ㅇㄷ어외
+		
+		// apllication scope에서 boardTypeList 얻어오기
 		ServletContext application = request.getServletContext();
 		
-		List<Map<String, Object>> boardTypeList =
-		(List<Map<String,Object>>)application.getAttribute("boardTypeList");
+		// boardTypeList
+		// [{boardCode:1, boardName=공지}, {boardCode:2, boardName=자유}, ....]
 		
-		log.debug(boardTypeList.toString());
+		List<Map<String, Object>> boardTypeList = 
+				(List<Map<String, Object>>)application.getAttribute("boardTypeList");
 		
-		//Uniform Resource Identifier : 통합 자원 식별자
+		
+//		log.debug(boardTypeList.toString());
+		
+		// Uniform Resource Identifier : 통합 자원 식별자
 		// - 자원 이름(주소)만 봐도 무엇인지 구별할 수 있는 문자열
 		String uri = request.getRequestURI();
+//		log.debug("uri : " + uri);
 		
-//		log.debug("uri :"+uri);
-										//["","board","1"]
-		int boardCode = Integer.parseInt(uri.split("/")[2]);
-		
-		//boardTypeList에서 boardCode를 하나씩 꺼내어 비교
-		for(Map<String, Object> boardType :boardTypeList) {
-		
-			//String.valueOf(값) : String으로 변환
-			int temp =
-					Integer.parseInt(String.valueOf(boardType.get("boardCode")));
+		try {
+											// ["", "board", "1"]
+			int boardCode = Integer.parseInt( uri.split("/")[2] );
 			
 			
-			//비교 결과가 같다면 
-			//request scope에 boardName을 추가
-			if(temp==boardCode) {
-				request.setAttribute("boardName", boardType.get("boardName"));
+			// boardTypeList에서 boardCode를 하나씩 꺼내어 비교
+			for(Map<String, Object> boardType : boardTypeList) {
+				
+				// String.valueOf(값) : String으로 변환
+				
+				int temp = 
+						Integer.parseInt( String.valueOf( boardType.get("boardCode") ));
+				
+				
+				// 비교 결과가 같다면
+				// request scope에 boardName을 추가
+				if(temp == boardCode) {
+					request.setAttribute("boardName", boardType.get("boardName"));
+					break;
+				}
 			}
+		
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		
 		
-		log.debug("boardCode : " + request.getAttribute("boardCode"));
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 	}
+	
+	
 
 }

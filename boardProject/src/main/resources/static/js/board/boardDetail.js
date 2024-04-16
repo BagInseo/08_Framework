@@ -74,3 +74,24 @@ fetch("/board/like",{
 
 
 
+
+const deleteBtn = document.querySelector("#deleteBtn"); //삭제 버튼
+
+deleteBtn.addEventListener("click", e=>{
+    
+    if(!confirm("삭제 하시겠습니까?")){ //취소 버튼눌렀을 때
+        alert("취소됨");
+        e.preventDefault;
+        return;
+
+    } else{
+        
+        const deleteBtnForm = document.querySelector("#deleteBtnForm");
+        deleteBtnForm.submit();
+    }
+})
+
+
+
+
+

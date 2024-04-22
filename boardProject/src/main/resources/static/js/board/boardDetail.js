@@ -75,7 +75,7 @@ fetch("/board/like",{
 
 
 
-const deleteBtn = document.querySelector("#deleteBtn"); //삭제 버튼
+/* const deleteBtn = document.querySelector("#deleteBtn"); //삭제 버튼
 
 deleteBtn.addEventListener("click", e=>{
     
@@ -89,9 +89,91 @@ deleteBtn.addEventListener("click", e=>{
         const deleteBtnForm = document.querySelector("#deleteBtnForm");
         deleteBtnForm.submit();
     }
+}) */
+
+
+/* 삭제(GET) */
+const deleteBtn = document.querySelector("#deleteBtn");
+
+if(deleteBtn != null){
+  deleteBtn.addEventListener("click", () => {
+    if( !confirm("삭제 하시겠습니까?") ) {
+      alert("취소됨")
+      return;
+    }
+
+    const url = location.pathname.replace("board","editBoard") + "/delete"; // /editBoard/1/2000/delete
+    const queryString = location.search; // ? cp=1
+    location.href = url + queryString;
+  });
+}
+
+
+/* 삭제(POST) */
+const deleteBtn2 = document.querySelector("#deleteBtn2");
+
+if(deleteBtn2 != null){
+  deleteBtn2.addEventListener("click", () => {
+
+    if( !confirm("삭제 하시겠습니까?") ) {
+      alert("취소됨")
+      return;
+    }
+
+    const url = location.pathname.replace("board","editBoard")  + "/delete"; 
+
+    // form태그 생성
+    const form = document.querySelector("form");
+    form.action = url;
+    form.method = "POST";
+
+    // cp값을 저장할 input 생성
+    const input = document.querySelector("input");
+    input.type = "hidden";
+    input.name = "cp";
+
+    // 쿼리스트링에서 원하는 파라미터 얻어오기
+    const params = new URLSearchParams(location.search)
+    const cp = params.get("cp");
+    input.value = cp;
+
+    form.append(input);
+
+    // 화면에 form태그를 추가한 후 제출하기
+    document.querySelector("body").append(form);
+    form.submit();
+  });
+}
+
+
+
+/* -------------------게시글 수정 버튼 ------------------------ */
+const updateBtn= document.querySelector("#updateBtn");
+
+if(updateBtn!=null){ //수정 버튼 존재 시
+    updateBtn.addEventListener("click",()=>{
+
+        // 현재 : /board/1/2010?cp=1
+        // 목표 : /editBOard/1/2010/update?cp=1 (GET방식)
+        location.href= location.pathname.replace('board','editBoard')
+                        +"/update"
+                        +location.search
+    })
+}
+
+
+
+//------------------------------------
+/* 목록으로 졸아가는 버튼 */
+const goToListBtn = document.querySelector("#goToListBtn");
+
+goToListBtn.addEventListener("click",()=>{
+  let url = location.pathname;
+  url = url.substring(0,url.lastIndexOf("/"));
+  
+  location.href=url + location.search; 
+                      // 쿼리 스트링 부분
 })
-
-
 
 
 

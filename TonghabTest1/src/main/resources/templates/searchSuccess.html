@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>searchSuccess</title>
+</head>
+
+<style>
+    .textCenter {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <h2>게시글 검색 결과</h2>
+
+    <table border="1" th:if="${!boardList.isEmpty()}">
+        <thead>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>내용</th>
+            <th>조회수</th>
+            <th>작성날짜</th>
+        </thead>
+
+        <tbody class="textCenter">
+            <tr th:each="board : ${boardList}">
+                <td th:text="${board.boardNo}">번호</td>
+                <td th:text="${board.boardTitle}">제목</td>
+                <td th:text="${board.userId}">작성자</td>
+                <td th:text="${board.boardContent}">내용</td>
+                <td th:text="${board.boardReadCount}">조회수</td>
+                <td th:text="${board.boardDate}">작성날짜</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
